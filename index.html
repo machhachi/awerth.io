@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jordan Reyes — Engineering Portfolio</title>
+  <meta name="description" content="Selected engineering projects: structural, manufacturing, and aerospace work." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <a class="mark" href="index.html">jordan-reyes / portfolio</a>
+    <nav>
+      <a href="#truss-bridge">Projects</a>
+      <a href="mailto:jordan@example.com">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="role">Mechanical engineer — structures &amp; manufacturing</p>
+      <h1>A working record of things I've designed, built, and load-tested.</h1>
+      <p>Selected projects below, from footbridges to fixtures to flight hardware. Scroll to browse, or jump to a section using the index.</p>
+    </div>
+  </section>
+
+  <div class="page-body">
+    <nav class="index-rail" id="index-rail" aria-label="Project index">
+      <!-- populated by js/main.js from js/projects.js -->
+    </nav>
+
+    <main id="project-list">
+      <!-- project sections populated by js/main.js from js/projects.js -->
+    </main>
+  </div>
+
+  <footer>
+    <p>Based in Pittsburgh, PA. Reach me at <a href="mailto:jordan@example.com">jordan@example.com</a> or on <a href="https://github.com/">GitHub</a>.</p>
+  </footer>
+
+  <script src="js/projects.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
