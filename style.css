@@ -1,0 +1,335 @@
+/* =========================================================
+   Design tokens
+   ========================================================= */
+:root {
+  --navy: #16324f;       /* blueprint background */
+  --navy-line: #2c507a;  /* grid lines on navy */
+  --sky: #8fbde0;        /* linework on navy */
+  --paper: #edeee9;      /* light section background */
+  --graphite: #22262b;   /* body text on paper */
+  --graphite-soft: #565f68;
+  --hairline: #c9c4b6;
+  --accent: #d9581f;     /* safety-orange accent */
+  --accent-dark: #b8460f;
+
+  --font-display: "Space Grotesk", "Arial Narrow", sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --max-width: 1100px;
+  --rail-width: 200px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--graphite);
+  font-family: var(--font-body);
+  line-height: 1.55;
+}
+
+a { color: var(--accent-dark); }
+a:hover { color: var(--accent); }
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0 0 0.4em;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   Top bar
+   ========================================================= */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1.5rem;
+  background: rgba(237, 238, 233, 0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.topbar .mark {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  color: var(--graphite);
+  text-decoration: none;
+}
+
+.topbar nav a {
+  margin-left: 1.5rem;
+  font-size: 0.92rem;
+  text-decoration: none;
+  color: var(--graphite-soft);
+}
+
+.topbar nav a:hover { color: var(--accent-dark); }
+
+/* =========================================================
+   Hero
+   ========================================================= */
+.hero {
+  position: relative;
+  background-color: var(--navy);
+  background-image:
+    linear-gradient(var(--navy-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--navy-line) 1px, transparent 1px);
+  background-size: 40px 40px;
+  color: #f2f5f8;
+  padding: 7rem 1.5rem 5rem;
+}
+
+.hero-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  max-width: 14ch;
+}
+
+.hero p {
+  max-width: 46ch;
+  font-size: 1.08rem;
+  color: #c9d9e8;
+}
+
+.hero .role {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--sky);
+  margin-bottom: 1rem;
+}
+
+/* =========================================================
+   Page layout: side index rail + main content
+   ========================================================= */
+.page-body {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: var(--rail-width) 1fr;
+  gap: 2.5rem;
+}
+
+@media (max-width: 860px) {
+  .page-body { display: block; padding: 0; }
+}
+
+/* Section index rail */
+.index-rail {
+  position: sticky;
+  top: 5rem;
+  align-self: start;
+  padding: 3rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+@media (max-width: 860px) {
+  .index-rail {
+    position: sticky;
+    top: 52px;
+    z-index: 40;
+    flex-direction: row;
+    overflow-x: auto;
+    background: var(--paper);
+    padding: 0.75rem 1.5rem;
+    border-bottom: 1px solid var(--hairline);
+    gap: 1.25rem;
+  }
+}
+
+.index-rail a {
+  font-size: 0.85rem;
+  text-decoration: none;
+  color: var(--graphite-soft);
+  border-left: 2px solid var(--hairline);
+  padding-left: 0.7rem;
+  white-space: nowrap;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+@media (max-width: 860px) {
+  .index-rail a {
+    border-left: none;
+    border-bottom: 2px solid var(--hairline);
+    padding-left: 0;
+    padding-bottom: 0.35rem;
+  }
+}
+
+.index-rail a.active {
+  color: var(--graphite);
+  border-color: var(--accent);
+  font-weight: 600;
+}
+
+/* =========================================================
+   Project list (modular cards, injected by js/main.js)
+   ========================================================= */
+.project-section {
+  padding: 3.5rem 0;
+  border-bottom: 1px solid var(--hairline);
+  scroll-margin-top: 5rem;
+}
+
+.project-section:last-child { border-bottom: none; }
+
+.project-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.project-section:nth-child(even) .project-card {
+  direction: rtl;
+}
+.project-section:nth-child(even) .project-card > * {
+  direction: ltr;
+}
+
+@media (max-width: 700px) {
+  .project-card { grid-template-columns: 1fr; }
+  .project-section:nth-child(even) .project-card { direction: ltr; }
+}
+
+.project-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--hairline);
+}
+
+.project-tag {
+  display: inline-block;
+  font-size: 0.78rem;
+  color: var(--accent-dark);
+  margin-bottom: 0.6rem;
+}
+
+.project-card h2 {
+  font-size: 1.6rem;
+}
+
+.project-card .descriptor {
+  color: var(--graphite-soft);
+  max-width: 48ch;
+}
+
+.project-meta {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--graphite-soft);
+  margin: 0.9rem 0 1.1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.project-card .view-link {
+  font-size: 0.92rem;
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 2px;
+}
+
+/* =========================================================
+   Footer
+   ========================================================= */
+footer {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+  font-size: 0.9rem;
+  color: var(--graphite-soft);
+}
+
+footer a { color: var(--graphite); }
+
+/* =========================================================
+   Project detail pages
+   ========================================================= */
+.detail-hero {
+  background-color: var(--navy);
+  background-image:
+    linear-gradient(var(--navy-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--navy-line) 1px, transparent 1px);
+  background-size: 40px 40px;
+  padding: 3.5rem 1.5rem;
+}
+
+.detail-hero-inner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.detail-hero a.back {
+  color: var(--sky);
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.detail-hero h1 {
+  color: #f2f5f8;
+  margin-top: 1rem;
+}
+
+.detail-body {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+}
+
+.detail-body img {
+  width: 100%;
+  border: 1px solid var(--hairline);
+  margin-bottom: 2rem;
+}
+
+.detail-body h2 {
+  font-size: 1.2rem;
+  margin-top: 2.2rem;
+}
+
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  margin: 1.5rem 0;
+}
+
+.spec-table td {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.spec-table td:first-child {
+  color: var(--graphite-soft);
+  width: 40%;
+}
